@@ -201,7 +201,7 @@ Bonus.prototype.update = function() {
 
 //Render gems
 Bonus.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.col * 101, this.row * 83 - 10);
+    ctx.drawImage(Resources.get(this.sprite), this.col * 101 + 10, this.row * 83 - 10);
 };
 
 //Check if the player got the gem
@@ -246,13 +246,13 @@ var createBonus = function(type) {
             return star = new Bonus('images/Star.png', 0, 1000);
             break;
         case 'orangeGem':
-            return orangeGem = new Bonus('images/Gem Orange.png', getRandomInt(1,3), 5000);
+            return orangeGem = new Bonus('images/Gem Orange_mini.png', getRandomInt(1,3), 5000);
             break;
         case 'blueGem':
-            return blueGem = new Bonus('images/Gem Blue.png', getRandomInt(1,3), 2000);
+            return blueGem = new Bonus('images/Gem Blue_mini.png', getRandomInt(1,3), 2000);
             break;
         case 'greenGem':
-            return greenGem = new Bonus('images/Gem Green.png', getRandomInt(1,3), 500);
+            return greenGem = new Bonus('images/Gem Green_mini.png', getRandomInt(1,3), 500);
             break;
     };
 };
