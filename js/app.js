@@ -105,17 +105,6 @@ Player.prototype.reset = function() {
 };
 
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
-var allEnemies = [
-    new Enemy(2, 165),
-    new Enemy(3, 250),
-    new Enemy(1, 300)
-    ];
-
-var player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -156,25 +145,30 @@ lifeCounter.loseLife = function() {
     }
     else {
         console.log('Game Over');
-        gameOver();
+        bolGameOver = true;
     };
     
 };
 
 //===============GAME OVER===================//
 
+var bolGameOver = false;
+
 //Render game over screen
 var gameOver = function() {
     ctx.clearRect(0,0, 505, 707);
     ctx.font ='bold 48px Arial';
-    ctx.fillText('GAME OVER!', 202, 303);
-    ctx.font = '36px Arial';
-    ctx.fillText('Press "Enter" to play again', 195, 403);
+    ctx.fillText('GAME OVER!', 101, 303);
+    ctx.font = '24px Arial';
+    ctx.fillText('Press "Enter" to play again', 101, 403);
     document.addEventListener('keyup', function(e) {
         if(e.keyCode == 13) {
-            //render();
+            bolGameOver = false;
+            lifeCounter.currentlives = 3;
+            score = 0;
         };
     });
+    return true;
 };
 
 
@@ -199,6 +193,11 @@ var Bonus = function(spriteURL, row, bonusValue) {
     this.col = getRandomInt(0,5);
 };
 
+Bonus.prototype.update = function() {
+    this.checkBonus();
+    this.render();
+};
+
 //Render gems
 Bonus.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.col * 101, this.row * 83 - 10);
@@ -213,7 +212,7 @@ Bonus.prototype.checkBonus = function() {
 };
 
 //Probablility of the type of gem
-Bonus.prototype.pickGemColor = function() {
+var pickGemColor = function() {
     var selector = getRandomInt(1,100);
     if(selector < 10) {
         return 'orangeGem';
@@ -240,20 +239,33 @@ var clearCanvas = function() {
 var generateBonus = function(type) {
     switch(type) {
         case 'star':
-            new Bonus('images/Star.png', 0, 1000);
-            //star.render();
+            return star = new Bonus('images/Star.png', 0, 1000);
             break;
         case 'orangeGem':
-            new Bonus('images/Gem Orange.png', getRandomInt(1,3), 5000);
-            orangeGem.render();
+            return orangeGem = new Bonus('images/Gem Orange.png', getRandomInt(1,3), 5000);
             break;
         case 'blueGem':
-            new Bonus('images/Gem Blue.png', getRandomInt(1,3), 2000);
-            blueGem.render();
+            return blueGem = new Bonus('images/Gem Blue.png', getRandomInt(1,3), 2000);
             break;
         case 'greenGem':
-            new Bonus('images/Gem Green.png', getRandomInt(1,3), 500);
-            greenGem.render();
+            return greenGem = new Bonus('images/Gem Green.png', getRandomInt(1,3), 500);
             break;
     };
 };
+
+// Now instantiate your objects.
+// Place all enemy objects in an array called allEnemies
+// Place the player object in a variable called player
+
+var allEnemies = [
+    new Enemy(2, 165),
+    new Enemy(3, 250),
+    new Enemy(1, 300)
+    ];
+
+var player = new Player();
+
+
+var allBonus = [
+    generateBonus('star'),
+    generateBonus(pickGemColor())];

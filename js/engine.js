@@ -56,7 +56,15 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
+
+        if(bolGameOver) {
+            if(gameOver()) {
+                win.requestAnimationFrame(main);
+            }
+        }
+        else {
         win.requestAnimationFrame(main);
+        }
     }
 
     /* This function does some initial setup that should only occur once,
@@ -95,6 +103,9 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+        allBonus.forEach(function(bonus) {
+            bonus.update();
+        });
     }
 
     /* This function initially draws the "game level", it will then call
@@ -154,6 +165,7 @@ var Engine = (function(global) {
 
         player.render();
         lifeCounter.render();
+        renderScore();
     }
 
     /* This function does nothing but it could have been a good place to
