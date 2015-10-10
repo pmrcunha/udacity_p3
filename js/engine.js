@@ -103,7 +103,7 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
-        allBonus.forEach(function(bonus) {
+        allBonuses.forEach(function(bonus) {
             bonus.update();
         });
     }
@@ -166,6 +166,10 @@ var Engine = (function(global) {
         player.render();
         lifeCounter.render();
         renderScore();
+
+        allBonuses.forEach(function(bonus) {
+            bonus.render();
+        });
     }
 
     /* This function does nothing but it could have been a good place to

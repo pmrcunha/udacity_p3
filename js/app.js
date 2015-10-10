@@ -71,7 +71,7 @@ Player.prototype.checkWin = function() {
     };
 };
 
-Player.prototype.update = function(dt) {
+Player.prototype.update = function() {
     clearCanvas();
     this.x = this.col * 101;
     this.y = this.row * 83 - 30;
@@ -102,6 +102,7 @@ Player.prototype.handleInput = function(key) {
 Player.prototype.reset = function() {
     this.col = 2;
     this.row = 5;
+    allBonuses = generateBonuses();
 };
 
 
@@ -194,8 +195,8 @@ var Bonus = function(spriteURL, row, bonusValue) {
 };
 
 Bonus.prototype.update = function() {
-    this.checkBonus();
     this.render();
+    this.checkBonus();
 };
 
 //Render gems
@@ -208,8 +209,11 @@ Bonus.prototype.checkBonus = function() {
     if(player.row == this.row && player.col == this.col) {
         score += this.bonusValue;
         renderScore();
+        allBonuses[1] = createBonus(pickGemColor());
     };
 };
+
+
 
 //Probablility of the type of gem
 var pickGemColor = function() {
@@ -236,7 +240,7 @@ var clearCanvas = function() {
 };
 
 
-var generateBonus = function(type) {
+var createBonus = function(type) {
     switch(type) {
         case 'star':
             return star = new Bonus('images/Star.png', 0, 1000);
@@ -265,7 +269,11 @@ var allEnemies = [
 
 var player = new Player();
 
+var generateBonuses = function() {
+    return [
+    createBonus('star'),
+    createBonus(pickGemColor())
+    ];
+};
 
-var allBonus = [
-    generateBonus('star'),
-    generateBonus(pickGemColor())];
+allBonuses = generateBonuses();
