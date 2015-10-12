@@ -285,16 +285,16 @@ var clearCanvas = function() {
 var createBonus = function(type) {
     switch(type) {
         case 'star':
-            return star = new Bonus('images/Star.png', 0, 1000);
+            return new Bonus('images/Star.png', 0, 1000);
             break;
         case 'orangeGem':
-            return orangeGem = new Bonus('images/Gem Orange_mini.png', getRandomInt(1,3), 5000);
+            return new Bonus('images/Gem Orange_mini.png', getRandomInt(1,3), 5000);
             break;
         case 'blueGem':
-            return blueGem = new Bonus('images/Gem Blue_mini.png', getRandomInt(1,3), 2000);
+            return new Bonus('images/Gem Blue_mini.png', getRandomInt(1,3), 2000);
             break;
         case 'greenGem':
-            return greenGem = new Bonus('images/Gem Green_mini.png', getRandomInt(1,3), 500);
+            return new Bonus('images/Gem Green_mini.png', getRandomInt(1,3), 500);
             break;
     }
 };
