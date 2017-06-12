@@ -3,6 +3,7 @@ FROGGER Arcade Game
 
 This simple arcade game was developed as a project from Udacity's Front End Nanodegree. All the assets and the game engine were provided by them. I wrote the game logic and objects, doing minor changes to the material provided.
 
+![screenshot](./screenshot.png "Screenshot")
 
 ### How to start the game:
 
